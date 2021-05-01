@@ -1,0 +1,17 @@
+{
+  "name": "mikobot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "discord.js": "^12.5.3",
+    "sodium": "^3.0.2",
+    "utf-8-validate": "^5.0.4",
+    "zlib-sync": "^0.1.7"
+  }
+}
