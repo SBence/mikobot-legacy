@@ -10,6 +10,6 @@ module.exports = (database, DataTypes) => {
             allowNull: false
         }
     }, {
-        timestamps: false
+        timestamps: true
     });
 };
