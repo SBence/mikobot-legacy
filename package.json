@@ -11,10 +11,12 @@
     "@mapbox/node-pre-gyp": "^1.0.4",
     "bufferutil": "^4.0.3",
     "discord.js": "^12.5.3",
+    "markov-strings": "^3.0.1",
     "sequelize": "^6.6.2",
     "sodium": "^3.0.2",
     "sqlite3": "^5.0.2",
     "utf-8-validate": "^5.0.4",
+    "ytdl-core": "^4.5.0",
     "zlib-sync": "^0.1.7"
   }
 }

@@ -9,6 +9,11 @@ module.exports = database.define('guilds', {
         type: DataTypes.STRING,
         defaultValue: 'm.',
         allowNull: false
+    },
+    videoInfo: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
     }
 }, {
     timestamps: true
