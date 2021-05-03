@@ -14,6 +14,11 @@ module.exports = database.define('guilds', {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false
+    },
+    speak: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull:false
     }
 }, {
     timestamps: true
