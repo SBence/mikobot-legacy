@@ -1,8 +1,9 @@
+const Guilds = require('../models/Guilds');
+
 module.exports = {
     name: 'ready',
     once: true,
-    async run(bot, database, DataTypes) {
-        const Guilds = require('../models/Guilds')(database, DataTypes);
+    async run(bot) {
         console.log(`Logged in as ${bot.user.tag}\nCleaning guild database...`);
         let deleted = 0;
         const guildIDs = bot.guilds.valueOf().map(guild => guild.id);

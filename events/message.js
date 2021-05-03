@@ -1,8 +1,9 @@
+const Guilds = require('../models/Guilds');
+
 module.exports = {
     name: 'message',
     once: false,
-    async run(message, bot, database, DataTypes) {
-        const Guilds = require('../models/Guilds')(database, DataTypes);
+    async run(message, bot) {
         const guildEntry = await Guilds.findOne({ where: { id: message.guild.id } });
         let prefix;
 
@@ -31,7 +32,7 @@ module.exports = {
         if (!bot.commands.has(command)) return;
 
         try {
-            bot.commands.get(command).run(message, args, database, DataTypes);
+            bot.commands.get(command).run(message, args);
         } catch (error) {
             console.error(error);
             message.reply('There was an error trying to run that command.');

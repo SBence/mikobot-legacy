@@ -1,6 +1,5 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const Sequelize = require('sequelize');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
@@ -14,14 +13,7 @@ const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'
 
 loadFiles(commandFiles, eventFiles);
 
-const database = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    logging: false,
-    storage: 'config/database.sqlite'
-});
-
-const Guilds = require('./models/Guilds')(database, Sequelize.DataTypes);
+const Guilds = require('./models/Guilds');
 
 console.log('Syncing guild database...');
 Guilds.sync();
@@ -38,9 +30,9 @@ function loadFiles(commandFiles, eventFiles) {
     for (const file of eventFiles) {
         const event = require(`./events/${file}`);
         if (event.once) {
-            bot.once(event.name, (...args) => event.run(...args, bot, database, Sequelize.DataTypes));
+            bot.once(event.name, (...args) => event.run(...args, bot));
         } else {
-            bot.on(event.name, (...args) => event.run(...args, bot, database, Sequelize.DataTypes));
+            bot.on(event.name, (...args) => event.run(...args, bot));
         }
         loadedEvents++;
     }
