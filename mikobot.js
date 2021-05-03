@@ -16,7 +16,7 @@ loadFiles(commandFiles, eventFiles);
 const Guilds = require('./models/Guilds');
 
 console.log('Syncing guild database...');
-Guilds.sync();
+Guilds.sync({ alter: true });
 
 bot.login(token);
 
