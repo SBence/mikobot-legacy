@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const Sequelize = require('sequelize');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+console.log('------Welcome to MikoBot------\nLoading files...')
 const config = require('./config/global.json');
 const { token } = require('./config/token.json');
 
@@ -35,14 +36,14 @@ bot.on('message', async message => {
                 id: message.guild.id
             });
             prefix = newGuild.get('prefix');
-            console.log(`[i]-----------------------------\nNew guild added to database\nName: ${message.guild.name}\nID: ${message.guild.id}\n[i]-----------------------------`);
+            console.log(`---------------------------[i]\nNew guild added to database\nName: ${message.guild.name}\nID: ${message.guild.id}\n---------------------------[i]`);
         }
         catch (e) {
             message.reply('A database error has occurred while trying to run your command.');
             if (e.name === 'SequelizeUniqueConstraintError') {
-                return console.log(`A guild entry with a matching ID (${message.guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
+                return console.error(`A guild entry with a matching ID (${message.guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
             }
-            return console.log(`An error has occurred adding the guild entry to the database with the following ID: ${message.guild.id}`);
+            return console.error(`An error has occurred adding the guild entry to the database with the following ID: ${message.guild.id}`);
         }
     }
 
@@ -71,9 +72,9 @@ function loadFiles(commandFiles, eventFiles) {
     for (const file of eventFiles) {
         const event = require(`./events/${file}`);
         if (event.once) {
-            bot.once(event.name, (...args) => event.execute(...args, bot));
+            bot.once(event.name, (...args) => event.run(...args, bot, database, Sequelize.DataTypes));
         } else {
-            bot.on(event.name, (...args) => event.execute(...args, bot));
+            bot.on(event.name, (...args) => event.run(...args, bot, database, Sequelize.DataTypes));
         }
         loadedEvents++;
     }
