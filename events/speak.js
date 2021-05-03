@@ -1,8 +1,8 @@
 const markovChain = require('markov-strings').default;
-const Guilds = require('../models/Guilds');
+const getGuildConfig = require('../utils/getGuildConfig');
 
 function condition(message, bot) {
-    const chance = 0; // TODO: Add a guild database column for this.
+    const chance = 2; // TODO: Add a guild database column for this.
     const realChance = 100 / chance;
     return message.mentions.has(bot.user) || !Math.floor(Math.random() * realChance) && !message.author.bot
 }
@@ -23,29 +23,7 @@ module.exports = {
     async run(message, bot) {
         if (!condition(message, bot)) return;
 
-        const guildEntry = await Guilds.findOne({ where: { id: message.guild.id } });
-        let speakEnabled; // TODO: Add toggle command so this value can be changed at runtime.
-
-        if (guildEntry) {
-            speakEnabled = guildEntry.get('speak');
-        } else {
-            try {
-                const newGuild = await Guilds.create({
-                    id: message.guild.id
-                });
-                speakEnabled = newGuild.get('speak');
-                console.log(`---------------------------[i]\nNew guild added to database\nName: ${message.guild.name}\nID: ${message.guild.id}\n---------------------------[i]`);
-            }
-            catch (e) {
-                message.reply('A database error has occurred while trying to run your command.');
-                if (e.name === 'SequelizeUniqueConstraintError') {
-                    return console.error(`A guild entry with a matching ID (${message.guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
-                }
-                return console.error(`An error has occurred adding the guild entry to the database with the following ID: ${message.guild.id}`);
-            }
-        }
-
-        if (!speakEnabled) return;
+        if (!getGuildConfig(message.guild, 'speak')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
         message.channel.startTyping();
         const messages = await getMessages(message.channel, 1000);

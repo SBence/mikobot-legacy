@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
-const Guilds = require('../models/Guilds');
+const getGuildConfig = require('../utils/getGuildConfig');
 
 module.exports = {
     name: 'message',
@@ -12,29 +12,7 @@ module.exports = {
         const videoUrls = message.content.match(regex);
         if (!videoUrls) return;
 
-        const guildEntry = await Guilds.findOne({ where: { id: message.guild.id } });
-        let videoInfoEnabled; // TODO: Add toggle command so this value can be changed at runtime.
-
-        if (guildEntry) {
-            videoInfoEnabled = guildEntry.get('videoInfo');
-        } else {
-            try {
-                const newGuild = await Guilds.create({
-                    id: message.guild.id
-                });
-                videoInfoEnabled = newGuild.get('videoInfo');
-                console.log(`---------------------------[i]\nNew guild added to database\nName: ${message.guild.name}\nID: ${message.guild.id}\n---------------------------[i]`);
-            }
-            catch (e) {
-                message.reply('A database error has occurred while trying to run your command.');
-                if (e.name === 'SequelizeUniqueConstraintError') {
-                    return console.error(`A guild entry with a matching ID (${message.guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
-                }
-                return console.error(`An error has occurred adding the guild entry to the database with the following ID: ${message.guild.id}`);
-            }
-        }
-
-        if (!videoInfoEnabled) return;
+        if (!getGuildConfig(message.guild, 'videoInfo')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
         for (videoUrl of videoUrls) {
             const info = await ytdl.getBasicInfo(videoUrl);
