@@ -4,6 +4,7 @@ module.exports = { // TODO: Add permission check.
     name: 'color',
     description: 'Sets your name color to the supplied hexadecimal color value\nSupplying an invalid color value will remove your current name color',
     args: true,
+    usage: '<hexadecimal color>',
     async run(message, args) {
         if (!await getGuildConfig(message.guild, 'color')) return; // TODO: Add toggle command so this value can be changed at runtime.
 

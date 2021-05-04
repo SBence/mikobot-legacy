@@ -4,6 +4,7 @@ module.exports = {
     name: 'prune',
     description: 'Bulk delete messages',
     args: true,
+    usage: '<number of messages to delete>',
     async run(message, args) {
         if (!await getGuildConfig(message.guild, 'bulkdelete')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
