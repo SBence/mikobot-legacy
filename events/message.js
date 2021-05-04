@@ -14,6 +14,10 @@ module.exports = {
         if (!bot.commands.has(commandName)) return;
         const command = bot.commands.get(commandName);
 
+        if (command.guildOnly && message.channel.type === 'dm') {
+            return message.reply('Nope, that doesn\'t make sense in DMs.');
+        }
+
         if (command.args && !args.length) {
             let reply = `${message.member.displayName}, look, we *need* some arguments here if we wanna do something.`;
             if (command.usage) {

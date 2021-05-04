@@ -3,6 +3,7 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = { // TODO: Add permission check.
     name: 'color',
     description: 'Sets your name color to the supplied hexadecimal color value\nSupplying an invalid color value will remove your current name color',
+    guildOnly: true,
     args: true,
     usage: '<hexadecimal color>',
     async run(message, args) {

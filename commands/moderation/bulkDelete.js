@@ -3,6 +3,7 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'prune',
     description: 'Bulk delete messages',
+    guildOnly: true,
     args: true,
     usage: '<number of messages to delete>',
     async run(message, args) {

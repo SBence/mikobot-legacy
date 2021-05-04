@@ -4,6 +4,7 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'setprefix',
     description: '',
+    guildOnly: true,
     args: true,
     usage: '<new prefix>',
     async run(message, args) {
