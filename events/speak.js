@@ -2,13 +2,11 @@ const markovChain = require('markov-strings').default;
 const getGuildConfig = require('../utils/getGuildConfig');
 
 async function conditionsMet(message, bot) {
-    const chance = 2; // TODO: Add a guild database column for this.
-    const realChance = 100 / chance;
-
     if (message.author.bot) return false;
     if (!await getGuildConfig(message.guild, 'speak')) return false; // TODO: Add toggle command so this value can be changed at runtime.
     if (message.mentions.has(bot.user)) return true;
-    if (!Math.floor(Math.random() * realChance)) return true;
+    const chance = await getGuildConfig(message.guild, 'speakchance'); // TODO: Add set command so this value can be changed at runtime.
+    if (!Math.floor(Math.random() * 100 / chance)) return true;
     return false;
 }
 

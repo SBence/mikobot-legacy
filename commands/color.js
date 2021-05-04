@@ -1,6 +1,6 @@
 const getGuildConfig = require('../utils/getGuildConfig');
 
-module.exports = { // TODO: Add permission check and database entry.
+module.exports = { // TODO: Add permission check.
     name: 'color',
     description: 'Sets your name color to the supplied hexadecimal color value\nSupplying an invalid color value will remove your current name color',
     async run(message, args) {

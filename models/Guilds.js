@@ -20,6 +20,11 @@ module.exports = database.define('guilds', {
         defaultValue: false,
         allowNull:false
     },
+    speakchance: {
+        type: DataTypes.INTEGER,
+        defaultValue: 2,
+        allowNull: false
+    },
     videoinfo: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
