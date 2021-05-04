@@ -38,6 +38,7 @@ module.exports = {
 
             if (details.media.artist && details.media.song) ytEmbed.addField('🔊 Audio', `${details.media.artist} - ${details.media.song}`, true); // null needed?
             if (details.media.game) ytEmbed.addField('🎮 Game', details.media.game, true);
+            if (details.chapters.length) ytEmbed.addField('🎬 Chapters', details.chapters.length, true)
 
             message.channel.send(ytEmbed);
         }
