@@ -6,6 +6,7 @@ module.exports = {
     async run(message, bot) {
         let prefix = '';
         if (message.channel.type !== 'dm') {
+            if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
             prefix = await getGuildConfig(message.guild, 'prefix');
         }
 

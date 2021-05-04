@@ -6,7 +6,7 @@ module.exports = {
     name: 'message',
     once: false,
     async run(message, bot) {
-        if (message.channel.type !== 'text' || message.author.bot) return;
+        if (message.channel.type !== 'text' || message.author.bot || !message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
 
         const regex = /https?:\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([a-zA-Z0-9-_]{11})(&(amp;)?[\w?=]*)?/g
         const videoUrls = message.content.match(regex);

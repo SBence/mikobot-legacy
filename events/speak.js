@@ -4,6 +4,7 @@ const getGuildConfig = require('../utils/getGuildConfig');
 async function conditionsMet(message, bot) {
     if (message.channel.type !== 'text') return false;
     if (message.author.bot) return false;
+    if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return false;
     if (!await getGuildConfig(message.guild, 'speak')) return false; // TODO: Add toggle command so this value can be changed at runtime.
     if (message.mentions.has(bot.user)) return true;
     const chance = await getGuildConfig(message.guild, 'speakchance'); // TODO: Add set command so this value can be changed at runtime.
