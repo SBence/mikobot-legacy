@@ -21,5 +21,6 @@ module.exports = {
                 .setAuthor(user.tag)
                 .setImage(avatar));
         }
+        return 0;
     }
 };

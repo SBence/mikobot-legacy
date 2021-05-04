@@ -3,6 +3,7 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'prune',
     description: 'Bulk delete messages',
+    args: true,
     async run(message, args) {
         if (!await getGuildConfig(message.guild, 'bulkdelete')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
@@ -16,7 +17,7 @@ module.exports = {
 
         message.channel.bulkDelete(amount, true).catch(err => {
             console.error(err);
-            message.channel.send('An error has occurred trying to prune messages.');
+            return message.channel.send('An error has occurred trying to prune messages.');
         });
     }
 };

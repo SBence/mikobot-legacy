@@ -14,6 +14,10 @@ module.exports = {
         if (!bot.commands.has(commandName)) return;
         const command = bot.commands.get(commandName);
 
+        if (command.args && !args.length) {
+            return message.channel.send(`${message.member.displayName}, look, we *need* some arguments here if we wanna do something.`);
+        }
+
         try {
             return command.run(message, args);
         } catch (error) {

@@ -4,11 +4,12 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'setprefix',
     description: '',
+    args: true,
     async run(message, args) {
         try {
             const affectedRows = await Guilds.update({ prefix: args[0] }, { where: { id: message.guild.id } });
             // TODO: Add feedback to user, trim and check for valid input.
-            message.channel.send(`Prefix set to \`${await getGuildConfig(message.guild, 'prefix')}\``);
+            return message.channel.send(`Prefix set to \`${await getGuildConfig(message.guild, 'prefix')}\``);
         }
         catch (e) {
             message.channel.send('An error has occurred while trying to change the prefix.');
