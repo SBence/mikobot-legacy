@@ -10,6 +10,11 @@ module.exports = database.define('guilds', {
         defaultValue: 'm.',
         allowNull: false
     },
+    avatar: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    },
     color: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
