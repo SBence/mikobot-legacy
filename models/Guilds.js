@@ -10,7 +10,7 @@ module.exports = database.define('guilds', {
         defaultValue: 'm.',
         allowNull: false
     },
-    videoInfo: {
+    videoinfo: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false
