@@ -1,6 +1,6 @@
 const getGuildConfig = require('../../utils/getGuildConfig');
 
-module.exports = { // TODO: Add permission check.
+module.exports = {
     name: 'color',
     aliases: ['colour', 'setcolor', 'setcolour'],
     description: 'Sets your name color to the supplied hexadecimal color value\nSupplying an invalid color value will remove your current name color',

@@ -11,7 +11,6 @@ module.exports = {
     async run(message, args) {
         try {
             const affectedRows = await Guilds.update({ prefix: args[0] }, { where: { id: message.guild.id } });
-            // TODO: Add feedback to user, trim and check for valid input.
             return message.channel.send(`Prefix set to \`${await getGuildConfig(message.guild, 'prefix')}\``);
         }
         catch (e) {
