@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const getGuildConfig = require('../utils/getGuildConfig');
+const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'pfp',

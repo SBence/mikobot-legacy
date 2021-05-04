@@ -8,10 +8,10 @@ console.log('------Welcome to MikoBot------\nLoading files...')
 const config = require('./config/global.json');
 const { token } = require('./config/token.json');
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const commandFolders = fs.readdirSync('./commands');
+const eventFolders = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-loadFiles(commandFiles, eventFiles);
+loadFiles(commandFolders, eventFolders);
 
 const Guilds = require('./models/Guilds');
 
@@ -22,10 +22,13 @@ bot.login(token);
 
 function loadFiles(commandFiles, eventFiles) {
     let loadedCommands = 0, loadedEvents = 0;
-    for (const file of commandFiles) {
-        const command = require(`./commands/${file}`);
-        bot.commands.set(command.name, command);
-        loadedCommands++;
+    for (const folder of commandFolders) {
+        const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+        for (const file of commandFiles) {
+            const command = require(`./commands/${folder}/${file}`);
+            bot.commands.set(command.name, command);
+            loadedCommands++;
+        }
     }
     for (const file of eventFiles) {
         const event = require(`./events/${file}`);

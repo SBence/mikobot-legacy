@@ -1,4 +1,4 @@
-const getGuildConfig = require('../utils/getGuildConfig');
+const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'prune',

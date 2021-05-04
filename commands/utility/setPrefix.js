@@ -1,5 +1,5 @@
-const Guilds = require('../models/Guilds');
-const getGuildConfig = require('../utils/getGuildConfig');
+const Guilds = require('../../models/Guilds');
+const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'setprefix',
