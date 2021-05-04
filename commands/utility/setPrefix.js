@@ -5,7 +5,7 @@ module.exports = {
     name: 'setprefix',
     description: '',
     guildOnly: true,
-    permissions: 'MANAGE_SERVER',
+    userPermissions: 'MANAGE_SERVER',
     args: true,
     usage: '<new prefix>',
     async run(message, args) {

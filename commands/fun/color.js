@@ -5,6 +5,7 @@ module.exports = {
     aliases: ['colour', 'setcolor', 'setcolour'],
     description: 'Sets your name color to the supplied hexadecimal color value\nSupplying an invalid color value will remove your current name color',
     guildOnly: true,
+    botPermissions: 'MANAGE_ROLES',
     args: true,
     usage: '<hexadecimal color>',
     async run(message, args) {

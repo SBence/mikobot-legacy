@@ -5,6 +5,7 @@ module.exports = {
     name: 'avatar',
     aliases: ['pfp'],
     description: 'Sends the mentioned user\'s avatar',
+    botPermissions: 'EMBED_LINKS',
     async run(message, args) {
         if (!await getGuildConfig(message.guild, 'avatar')) return; // TODO: Add toggle command so this value can be changed at runtime.
 

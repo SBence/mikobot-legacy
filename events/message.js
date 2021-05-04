@@ -18,13 +18,20 @@ module.exports = {
         if (!command) return;
 
         if (command.guildOnly && message.channel.type === 'dm') {
-            return message.reply('Nope, that doesn\'t make sense in DMs.');
+            return message.channel.send('Nope, that doesn\'t make sense in DMs.');
         }
 
-        if (command.permissions) {
-            const authorPerms = message.channel.permissionsFor(message.author);
-            if (!authorPerms || !authorPerms.has(command.permissions)) {
-                return message.reply('I\'m afraid you don\'t possess the necessary permissions to perform this action.');
+        if (command.userPermissions) {
+            const authorPermissions = message.channel.permissionsFor(message.author);
+            if (!authorPermissions || !authorPermissions.has(command.userPermissions)) {
+                return message.channel.send('I\'m afraid you don\'t possess the necessary permissions to perform this action.');
+            }
+        }
+
+        if (command.botPermissions) {
+            const currentBotPermissions = message.channel.permissionsFor(bot.user);
+            if (!currentBotPermissions || !currentBotPermissions.has(command.botPermissions)) {
+                return message.channel.send('It seems I don\'t have the permission(s) to do that.');
             }
         }
 
