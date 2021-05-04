@@ -10,6 +10,11 @@ module.exports = database.define('guilds', {
         defaultValue: 'm.',
         allowNull: false
     },
+    bulkdelete: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    },
     avatar: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
