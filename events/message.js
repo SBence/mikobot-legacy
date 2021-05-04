@@ -15,7 +15,7 @@ module.exports = {
             bot.commands.get(command).run(message, args);
         } catch (error) {
             console.error(error);
-            message.reply('There was an error trying to run that command.');
+            message.channel.send('There was an error trying to run that command.');
         }
     }
 };
