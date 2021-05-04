@@ -4,6 +4,7 @@ module.exports = {
     name: 'prune',
     description: 'Bulk delete messages',
     guildOnly: true,
+    permissions: 'MANAGE_MESSAGES',
     args: true,
     usage: '<number of messages to delete>',
     async run(message, args) {

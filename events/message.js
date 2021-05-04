@@ -18,6 +18,13 @@ module.exports = {
             return message.reply('Nope, that doesn\'t make sense in DMs.');
         }
 
+        if (command.permissions) {
+            const authorPerms = message.channel.permissionsFor(message.author);
+            if (!authorPerms || !authorPerms.has(command.permissions)) {
+                return message.reply('I\'m afraid you don\'t possess the necessary permissions to perform this action.');
+            }
+        }
+
         if (command.args && !args.length) {
             let reply = `${message.member.displayName}, look, we *need* some arguments here if we wanna do something.`;
             if (command.usage) {
