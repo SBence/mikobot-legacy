@@ -22,4 +22,4 @@ module.exports = async (guild, config) => {
         }
     }
     return value;
-}
+};

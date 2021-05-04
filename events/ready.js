@@ -10,7 +10,7 @@ module.exports = {
         try {
             const guildsInDb = await Guilds.findAll({ attributes: ['id'] });
             const orphanedGuildIDs = guildsInDb.map(guild => guild.id).filter(guildID => !guildIDs.includes(guildID));
-            for (guildID of orphanedGuildIDs) {
+            for (const guildID of orphanedGuildIDs) {
                 const rowCount = await Guilds.destroy({ where: { id: guildID } });
                 if (rowCount) {
                     deleted++;

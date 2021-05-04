@@ -42,7 +42,7 @@ module.exports = {
             return message.channel.send('I literally have no words. Wow.');
         }
     }
-}
+};
 
 async function getMessages(channel, limit) {
     limit = limit * 2;

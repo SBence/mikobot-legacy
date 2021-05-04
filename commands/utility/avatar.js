@@ -15,7 +15,7 @@ module.exports = {
         } else {
             users = message.mentions.users.array();
         }
-        for (user of users) {
+        for (const user of users) {
             const avatar = user.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 });
             message.channel.send(new Discord.MessageEmbed()
                 .setTitle('Image link')

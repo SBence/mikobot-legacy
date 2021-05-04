@@ -8,13 +8,13 @@ module.exports = {
     async run(message, bot) {
         if (message.channel.type !== 'text' || message.author.bot || !message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
 
-        const regex = /https?:\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([a-zA-Z0-9-_]{11})(&(amp;)?[\w?=]*)?/g
+        const regex = /https?:\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([a-zA-Z0-9-_]{11})(&(amp;)?[\w?=]*)?/g;
         const videoUrls = message.content.match(regex);
         if (!videoUrls) return;
 
         if (!await getGuildConfig(message.guild, 'videoinfo')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
-        for (videoUrl of videoUrls) {
+        for (const videoUrl of videoUrls) {
             const info = await ytdl.getBasicInfo(videoUrl);
             const details = info.videoDetails;
             const ytEmbed = new Discord.MessageEmbed()
@@ -38,7 +38,7 @@ module.exports = {
 
             if (details.media.artist && details.media.song) ytEmbed.addField('🔊 Audio', `${details.media.artist} - ${details.media.song}`, true); // null needed?
             if (details.media.game) ytEmbed.addField('🎮 Game', details.media.game, true);
-            if (details.chapters.length) ytEmbed.addField('🎬 Chapters', details.chapters.length, true)
+            if (details.chapters.length) ytEmbed.addField('🎬 Chapters', details.chapters.length, true);
 
             message.channel.send(ytEmbed);
         }
