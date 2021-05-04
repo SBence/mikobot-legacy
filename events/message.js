@@ -11,8 +11,8 @@ module.exports = {
         const args = message.content.slice(prefix.length).trim().split(/ +/);
 
         const commandName = args.shift().toLowerCase();
-        if (!bot.commands.has(commandName)) return;
-        const command = bot.commands.get(commandName);
+        const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+        if (!command) return;
 
         if (command.guildOnly && message.channel.type === 'dm') {
             return message.reply('Nope, that doesn\'t make sense in DMs.');

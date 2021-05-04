@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
-    name: 'pfp',
+    name: 'avatar',
+    aliases: ['pfp'],
     description: 'Sends the mentioned user\'s avatar',
     async run(message, args) {
         if (!await getGuildConfig(message.guild, 'avatar')) return; // TODO: Add toggle command so this value can be changed at runtime.

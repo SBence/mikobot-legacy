@@ -1,7 +1,8 @@
 const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
-    name: 'prune',
+    name: 'bulkdelete',
+    aliases: ['batchdelete', 'prune'],
     description: 'Bulk delete messages',
     guildOnly: true,
     permissions: 'MANAGE_MESSAGES',
