@@ -15,10 +15,10 @@ module.exports = {
         const command = bot.commands.get(commandName);
 
         try {
-            command.run(message, args);
+            return command.run(message, args);
         } catch (error) {
             console.error(error);
-            message.channel.send('There was an error trying to run that command.');
+            return message.channel.send('An error has occurred while trying to run that command.');
         }
     }
 };

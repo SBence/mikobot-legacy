@@ -41,6 +41,7 @@ module.exports = {
 
             message.channel.send(ytEmbed);
         }
+        return 0;
     }
 };
 
