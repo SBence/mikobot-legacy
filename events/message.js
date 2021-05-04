@@ -4,7 +4,10 @@ module.exports = {
     name: 'message',
     once: false,
     async run(message, bot) {
-        const prefix = await getGuildConfig(message.guild, 'prefix');
+        let prefix = '';
+        if (message.channel.type !== 'dm') {
+            prefix = await getGuildConfig(message.guild, 'prefix');
+        }
 
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 

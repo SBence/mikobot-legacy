@@ -2,6 +2,7 @@ const markovChain = require('markov-strings').default;
 const getGuildConfig = require('../utils/getGuildConfig');
 
 async function conditionsMet(message, bot) {
+    if (message.channel.type !== 'text') return false;
     if (message.author.bot) return false;
     if (!await getGuildConfig(message.guild, 'speak')) return false; // TODO: Add toggle command so this value can be changed at runtime.
     if (message.mentions.has(bot.user)) return true;
