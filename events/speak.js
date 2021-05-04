@@ -1,10 +1,15 @@
 const markovChain = require('markov-strings').default;
 const getGuildConfig = require('../utils/getGuildConfig');
 
-function condition(message, bot) {
+async function conditionsMet(message, bot) {
     const chance = 2; // TODO: Add a guild database column for this.
     const realChance = 100 / chance;
-    return message.mentions.has(bot.user) || !Math.floor(Math.random() * realChance) && !message.author.bot
+
+    if (message.author.bot) return false;
+    if (!await getGuildConfig(message.guild, 'speak')) return false; // TODO: Add toggle command so this value can be changed at runtime.
+    if (message.mentions.has(bot.user)) return true;
+    if (!Math.floor(Math.random() * realChance)) return true;
+    return false;
 }
 
 const markovOptions = {
@@ -21,9 +26,7 @@ module.exports = {
     name: 'message',
     once: false,
     async run(message, bot) {
-        if (!condition(message, bot)) return;
-
-        if (!await getGuildConfig(message.guild, 'speak')) return; // TODO: Add toggle command so this value can be changed at runtime.
+        if (!await conditionsMet(message, bot)) return;
 
         message.channel.startTyping();
         const messages = await getMessages(message.channel, 1000);
