@@ -4,7 +4,7 @@ module.exports = {
     name: 'message',
     once: false,
     async run(message, bot) {
-        const prefix = getGuildConfig(message.guild, 'prefix');
+        const prefix = await getGuildConfig(message.guild, 'prefix');
 
         if (!message.content.startsWith(prefix) || message.author.bot) return;
         const args = message.content.slice(prefix.length).trim().split(/ +/);

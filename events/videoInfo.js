@@ -12,7 +12,7 @@ module.exports = {
         const videoUrls = message.content.match(regex);
         if (!videoUrls) return;
 
-        if (!getGuildConfig(message.guild, 'videoInfo')) return; // TODO: Add toggle command so this value can be changed at runtime.
+        if (!await getGuildConfig(message.guild, 'videoInfo')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
         for (videoUrl of videoUrls) {
             const info = await ytdl.getBasicInfo(videoUrl);

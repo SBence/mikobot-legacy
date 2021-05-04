@@ -23,7 +23,7 @@ module.exports = {
     async run(message, bot) {
         if (!condition(message, bot)) return;
 
-        if (!getGuildConfig(message.guild, 'speak')) return; // TODO: Add toggle command so this value can be changed at runtime.
+        if (!await getGuildConfig(message.guild, 'speak')) return; // TODO: Add toggle command so this value can be changed at runtime.
 
         message.channel.startTyping();
         const messages = await getMessages(message.channel, 1000);
