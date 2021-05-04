@@ -1,4 +1,4 @@
-const {database, DataTypes} = require('../sequelize/database');
+const { database, DataTypes } = require('../sequelize/database');
 
 module.exports = database.define('guilds', {
     id: {
@@ -10,7 +10,7 @@ module.exports = database.define('guilds', {
         defaultValue: 'm.',
         allowNull: false
     },
-    videoinfo: {
+    color: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false
@@ -19,7 +19,12 @@ module.exports = database.define('guilds', {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull:false
-    }
+    },
+    videoinfo: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    },
 }, {
     timestamps: true
 });
