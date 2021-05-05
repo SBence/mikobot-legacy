@@ -9,8 +9,8 @@ module.exports = {
     botPermissions: 'MANAGE_MESSAGES',
     args: true,
     usage: '<number of messages to delete>',
-    async run(message, args) {
-        if (!await getGuildConfig(message.guild, 'bulkdelete')) return; // TODO: Add toggle command so this value can be changed at runtime.
+    async run(message, args, bot) {
+        if (!await getGuildConfig(message.guild, 'bulkdelete')) return;
 
         const amount = parseInt(args[0]) + 1;
 

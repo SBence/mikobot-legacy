@@ -2,7 +2,9 @@ const getGuildConfig = require('../utils/getGuildConfig');
 
 module.exports = {
     name: 'message',
+    on: 'message',
     once: false,
+    protected: true,
     async run(message, bot) {
         let prefix = '';
         if (message.channel.type !== 'dm') {
@@ -45,7 +47,7 @@ module.exports = {
         }
 
         try {
-            return command.run(message, args);
+            return command.run(message, args, bot);
         } catch (error) {
             console.error(error);
             return message.channel.send('An error has occurred while trying to run that command.');

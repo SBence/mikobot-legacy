@@ -2,7 +2,9 @@ const Guilds = require('../models/Guilds');
 
 module.exports = {
     name: 'guildDelete',
+    on: 'guildDelete',
     once: false,
+    protected: true,
     async run(guild, bot) {
         try {
             const rowCount = await Guilds.destroy({ where: { id: guild.id } });

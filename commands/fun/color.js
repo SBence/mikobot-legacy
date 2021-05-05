@@ -7,8 +7,8 @@ module.exports = {
     guildOnly: true,
     botPermissions: 'MANAGE_ROLES',
     usage: '<hexadecimal color>',
-    async run(message, args) {
-        if (!await getGuildConfig(message.guild, 'color')) return; // TODO: Add toggle command so this value can be changed at runtime.
+    async run(message, args, bot) {
+        if (!await getGuildConfig(message.guild, 'color')) return;
 
         let color;
         const colorMatches = args[0].match('^#?[A-Fa-f0-9]{6}$');

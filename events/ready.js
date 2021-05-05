@@ -2,7 +2,9 @@ const Guilds = require('../models/Guilds');
 
 module.exports = {
     name: 'ready',
+    on: 'ready',
     once: true,
+    protected: true,
     async run(bot) {
         console.log(`Logged in as ${bot.user.tag}\nCleaning guild database...`);
         let deleted = 0;

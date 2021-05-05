@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+bot.events = new Discord.Collection();
 
 console.log('------Welcome to MikoBot------\nLoading files...');
 
@@ -32,10 +33,11 @@ function loadFiles() {
     const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
     for (const file of eventFiles) {
         const event = require(`./events/${file}`);
+        bot.events.set(event.name, event);
         if (event.once) {
-            bot.once(event.name, (...args) => event.run(...args, bot));
+            bot.once(event.on, (...args) => event.run(...args, bot));
         } else {
-            bot.on(event.name, (...args) => event.run(...args, bot));
+            bot.on(event.on, (...args) => event.run(...args, bot));
         }
         loadedEvents++;
     }

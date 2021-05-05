@@ -3,7 +3,8 @@ const ytdl = require('ytdl-core');
 const getGuildConfig = require('../utils/getGuildConfig');
 
 module.exports = {
-    name: 'message',
+    name: 'videoinfo',
+    on: 'message',
     once: false,
     async run(message, bot) {
         if (message.channel.type !== 'text' || message.author.bot || !message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
@@ -12,7 +13,7 @@ module.exports = {
         const videoUrls = message.content.match(regex);
         if (!videoUrls) return;
 
-        if (!await getGuildConfig(message.guild, 'videoinfo')) return; // TODO: Add toggle command so this value can be changed at runtime.
+        if (!await getGuildConfig(message.guild, 'videoinfo')) return;
 
         for (const videoUrl of videoUrls) {
             const info = await ytdl.getBasicInfo(videoUrl);

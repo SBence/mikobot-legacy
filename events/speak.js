@@ -5,9 +5,10 @@ async function conditionsMet(message, bot) {
     if (message.channel.type !== 'text') return false;
     if (message.author.bot) return false;
     if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return false;
-    if (!await getGuildConfig(message.guild, 'speak')) return false; // TODO: Add toggle command so this value can be changed at runtime.
+    if (!await getGuildConfig(message.guild, 'speak')) return false;
     if (message.mentions.has(bot.user)) return true;
     const chance = await getGuildConfig(message.guild, 'speakchance'); // TODO: Add set command so this value can be changed at runtime.
+    if (chance === 0) return false;
     if (!Math.floor(Math.random() * 100 / chance)) return true;
     return false;
 }
@@ -23,7 +24,8 @@ const markovOptions = {
 };
 
 module.exports = {
-    name: 'message',
+    name: 'speak',
+    on: 'message',
     once: false,
     async run(message, bot) {
         if (!await conditionsMet(message, bot)) return;
