@@ -2,8 +2,10 @@
   "name": "mikobot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "main": "mikobot.js",
+  "scripts": {
+    "start": "node ."
+  },
   "keywords": [],
   "author": "",
   "license": "",
