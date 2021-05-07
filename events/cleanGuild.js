@@ -1,7 +1,7 @@
 const Guilds = require('../models/Guilds');
 
 module.exports = {
-    name: 'guildDelete',
+    name: 'cleanGuild',
     on: 'guildDelete',
     once: false,
     protected: true,

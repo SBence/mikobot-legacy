@@ -1,7 +1,7 @@
 const Guilds = require('../models/Guilds');
 
 module.exports = {
-    name: 'ready',
+    name: 'cleanDatabase',
     on: 'ready',
     once: true,
     protected: true,
