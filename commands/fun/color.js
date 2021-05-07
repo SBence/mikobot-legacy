@@ -11,8 +11,10 @@ module.exports = {
         if (!await getGuildConfig(message.guild, 'color')) return;
 
         let color;
-        const colorMatches = args[0].match('^#?[A-Fa-f0-9]{6}$');
-        if (colorMatches) color = colorMatches[0];
+        if (args.length) {
+            const colorMatches = args[0].match('^#?[A-Fa-f0-9]{6}$');
+            if (colorMatches) color = colorMatches[0];
+        }
 
         if (!color) {
             const colorRole = message.guild.roles.cache.find(role => role.name === message.author.id);
