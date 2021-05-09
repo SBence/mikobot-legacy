@@ -25,6 +25,8 @@ module.exports = {
             return message.channel.send('Nope, that doesn\'t make sense in DMs.');
         }
 
+        if (!command.protected && !await getGuildConfig(message.guild, command.name)) return;
+
         if (command.userPermissions) {
             const authorPermissions = message.channel.permissionsFor(message.author);
             if (!authorPermissions || !authorPermissions.has(command.userPermissions)) {
@@ -46,8 +48,6 @@ module.exports = {
             }
             return message.channel.send(reply);
         }
-
-        if (!command.protected && !await getGuildConfig(message.guild, command.name)) return;
 
         try {
             return command.run(message, args, bot);
