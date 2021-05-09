@@ -38,11 +38,10 @@ function loadFiles() {
         const eventFiles = fs.readdirSync(`./events/${folder}`).filter(file => file.endsWith('.js'));
         for (const file of eventFiles) {
             const event = require(`./events/${folder}/${file}`);
-
             if (event.once) {
-                bot.once(event.on, (...args) => event.run(...args, bot));
+                bot.once(folder, (...args) => event.run(...args, bot));
             } else {
-                bot.on(event.on, (...args) => event.run(...args, bot));
+                bot.on(folder, (...args) => event.run(...args, bot));
             }
 
             bot.events.set(event.name, event);

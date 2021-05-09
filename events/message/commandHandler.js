@@ -2,7 +2,6 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'commandHandler',
-    on: 'message',
     once: false,
     protected: true,
     async run(message, bot) {

@@ -25,7 +25,6 @@ const markovOptions = {
 
 module.exports = {
     name: 'speak',
-    on: 'message',
     once: false,
     async run(message, bot) {
         if (!await conditionsMet(message, bot)) return;
