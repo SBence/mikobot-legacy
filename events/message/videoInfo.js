@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
-const getGuildConfig = require('../utils/getGuildConfig');
+const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'videoinfo',

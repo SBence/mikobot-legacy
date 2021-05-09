@@ -21,25 +21,33 @@ function loadFiles() {
     let loadedCommands = 0, loadedEvents = 0;
 
     const commandFolders = fs.readdirSync('./commands');
+
     for (const folder of commandFolders) {
         const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
         for (const file of commandFiles) {
             const command = require(`./commands/${folder}/${file}`);
+
             bot.commands.set(command.name, command);
             loadedCommands++;
         }
     }
 
-    const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-    for (const file of eventFiles) {
-        const event = require(`./events/${file}`);
-        bot.events.set(event.name, event);
-        if (event.once) {
-            bot.once(event.on, (...args) => event.run(...args, bot));
-        } else {
-            bot.on(event.on, (...args) => event.run(...args, bot));
+    const eventFolders = fs.readdirSync('./events');
+
+    for (const folder of eventFolders) {
+        const eventFiles = fs.readdirSync(`./events/${folder}`).filter(file => file.endsWith('.js'));
+        for (const file of eventFiles) {
+            const event = require(`./events/${folder}/${file}`);
+
+            if (event.once) {
+                bot.once(event.on, (...args) => event.run(...args, bot));
+            } else {
+                bot.on(event.on, (...args) => event.run(...args, bot));
+            }
+
+            bot.events.set(event.name, event);
+            loadedEvents++;
         }
-        loadedEvents++;
     }
 
     console.log(`Loaded commands: ${loadedCommands}\nLoaded event handlers: ${loadedEvents}`);

@@ -1,4 +1,4 @@
-const refreshStatus = require('../utils/refreshStatus');
+const refreshStatus = require('../../utils/refreshStatus');
 
 module.exports = {
     name: 'refreshStatusOnReady',

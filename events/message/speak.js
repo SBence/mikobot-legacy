@@ -1,5 +1,5 @@
 const markovChain = require('markov-strings').default;
-const getGuildConfig = require('../utils/getGuildConfig');
+const getGuildConfig = require('../../utils/getGuildConfig');
 
 async function conditionsMet(message, bot) {
     if (message.channel.type !== 'text') return false;
