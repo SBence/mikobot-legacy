@@ -20,7 +20,7 @@ module.exports = {
 
         if (!command) return;
 
-        if (command.guildOnly && message.channel.type === 'dm') {
+        if (!command.runInDMs && message.channel.type === 'dm') {
             return message.channel.send('Nope, that doesn\'t make sense in DMs.');
         }
 

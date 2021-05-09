@@ -4,7 +4,6 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'toggle',
     description: 'Toggle server-specific settings',
-    guildOnly: true,
     userPermissions: 'MANAGE_SERVER',
     args: true,
     usage: '<setting>',

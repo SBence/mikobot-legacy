@@ -4,6 +4,7 @@ module.exports = {
     name: 'avatar',
     aliases: ['pfp'],
     description: 'Sends the mentioned user\'s avatar',
+    runInDMs: true,
     botPermissions: 'EMBED_LINKS',
     async run(message, args, bot) {
         let users;

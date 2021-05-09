@@ -2,7 +2,6 @@ module.exports = {
     name: 'bulkdelete',
     aliases: ['batchdelete', 'prune'],
     description: 'Bulk delete messages',
-    guildOnly: true,
     userPermissions: 'MANAGE_MESSAGES',
     botPermissions: 'MANAGE_MESSAGES',
     args: true,

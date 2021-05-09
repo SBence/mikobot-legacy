@@ -3,7 +3,6 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'status',
     description: 'See the state of a specific guild-level setting',
-    guildOnly: true,
     userPermissions: 'MANAGE_SERVER',
     args: true,
     usage: '<setting>',

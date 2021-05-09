@@ -4,6 +4,7 @@ module.exports = {
     name: 'help',
     description: 'Get help on command usage',
     usage: '<command name>',
+    runInDMs: true,
     protected: true,
     async run(message, args, bot) {
         const data = [];

@@ -4,7 +4,6 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 module.exports = {
     name: 'setprefix',
     description: '',
-    guildOnly: true,
     userPermissions: 'MANAGE_SERVER',
     args: true,
     usage: '<new prefix>',
