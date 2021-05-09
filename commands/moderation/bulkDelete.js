@@ -1,5 +1,3 @@
-const getGuildConfig = require('../../utils/getGuildConfig');
-
 module.exports = {
     name: 'bulkdelete',
     aliases: ['batchdelete', 'prune'],
@@ -10,8 +8,6 @@ module.exports = {
     args: true,
     usage: '<number of messages to delete>',
     async run(message, args, bot) {
-        if (!await getGuildConfig(message.guild, 'bulkdelete')) return;
-
         const amount = parseInt(args[0]) + 1;
 
         if (isNaN(amount)) {

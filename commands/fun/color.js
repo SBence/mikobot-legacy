@@ -1,5 +1,3 @@
-const getGuildConfig = require('../../utils/getGuildConfig');
-
 module.exports = {
     name: 'color',
     aliases: ['colour', 'setcolor', 'setcolour'],
@@ -8,9 +6,8 @@ module.exports = {
     botPermissions: 'MANAGE_ROLES',
     usage: '<hexadecimal color>',
     async run(message, args, bot) {
-        if (!await getGuildConfig(message.guild, 'color')) return;
-
         let color;
+
         if (args.length) {
             const colorMatches = args[0].match('^#?[A-Fa-f0-9]{6}$');
             if (colorMatches) color = colorMatches[0];

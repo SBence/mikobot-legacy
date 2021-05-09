@@ -7,6 +7,7 @@ module.exports = {
     protected: true,
     async run(message, bot) {
         let prefix = '';
+
         if (message.channel.type !== 'dm') {
             if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
             prefix = await getGuildConfig(message.guild, 'prefix');
@@ -15,9 +16,9 @@ module.exports = {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
         const args = message.content.slice(prefix.length).trim().split(/ +/);
-
         const commandName = args.shift().toLowerCase();
         const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
         if (!command) return;
 
         if (command.guildOnly && message.channel.type === 'dm') {
@@ -45,6 +46,8 @@ module.exports = {
             }
             return message.channel.send(reply);
         }
+
+        if (!command.protected && !await getGuildConfig(message.guild, command.name)) return;
 
         try {
             return command.run(message, args, bot);
