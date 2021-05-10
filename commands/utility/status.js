@@ -1,4 +1,5 @@
 const getGuildConfig = require('../../utils/getGuildConfig');
+const getCommand = require('../../utils/getCommand');
 
 module.exports = {
     name: 'status',
@@ -8,22 +9,16 @@ module.exports = {
     usage: '<setting>',
     protected: true,
     async run(message, args, bot) {
-        const settingName = args[0].toLowerCase();
-        let setting = bot.commands.get(settingName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(settingName));
+        const commandName = args[0].toLowerCase();
+        const command = getCommand(commandName, bot);
 
-        if (!setting || setting.protected) {
-            setting = bot.events.get(settingName) || bot.events.find(evt => evt.aliases && evt.aliases.includes(settingName));
-
-            if (!setting || setting.protected) {
-                return message.channel.send('I\'m sorry, I can\'t find such a setting.');
-            }
-        }
+        if (!command) return message.channel.send('I\'m sorry, I can\'t find such a setting.');
 
         try {
-            return message.channel.send(`\`${settingName}\` is currently set to \`${await getGuildConfig(message.guild, setting.name)}\``);
+            return message.channel.send(`\`${commandName}\` is currently set to \`${await getGuildConfig(message.guild, command.name)}\``);
         }
         catch (e) {
-            message.channel.send(`An error has occurred while trying to get the state of \`${setting.name}\`.`);
+            message.channel.send(`An error has occurred while trying to get the state of \`${command.name}\`.`);
             return console.error(e);
         }
     }
