@@ -15,8 +15,8 @@ module.exports = {
             return message.channel.send('You must input a number between 1 and 99.');
         }
 
-        message.channel.bulkDelete(amount, true).catch(err => {
-            console.error(err);
+        message.channel.bulkDelete(amount, true).catch(e => {
+            console.error(e);
             return message.channel.send('An error has occurred trying to prune messages.');
         });
     }

@@ -38,7 +38,7 @@ module.exports = {
         if (result) {
             return message.channel.send(result.string);
         } else {
-            console.log('Markov string generation failed.');
+            console.log('ℹ️ Markov string generation failed.');
             return message.channel.send('I literally have no words. Wow.');
         }
     }

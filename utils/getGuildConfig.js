@@ -11,14 +11,14 @@ module.exports = async (guild, config) => {
                 id: guild.id
             });
             value = newGuild.get(config);
-            console.log(`---------------------------[i]\nNew guild added to database\nName: ${guild.name}\nID: ${guild.id}\n---------------------------[i]`);
+            console.log(`ℹ️ New guild added to database: ${guild.name} (${guild.id})`);
         }
         catch (e) {
-            // message.reply('A database error has occurred while trying to run your command.');
+            // message.channel.send('A database error has occurred while trying to run your command.');
             if (e.name === 'SequelizeUniqueConstraintError') {
-                return console.error(`A guild entry with a matching ID (${guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
+                return console.error(`⚠️ A guild entry with a matching ID (${guild.id}) already exists in the database. This error usually indicates a bug in the bot code, not in Sequelize.`);
             }
-            return console.error(`An error has occurred adding the guild entry to the database with the following ID: ${guild.id}`);
+            return console.error(`⚠️ An error has occurred adding the guild entry to the database with the following ID: ${guild.id}`);
         }
     }
     return value;

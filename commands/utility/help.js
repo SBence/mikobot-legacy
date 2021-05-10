@@ -22,7 +22,7 @@ module.exports = {
                     message.channel.send('I\'ve sent you a DM with all my commands.');
                 })
                 .catch(error => {
-                    console.error(`Could not send help DM to ${message.author.tag}\n`, error);
+                    console.error(`⚠️ Could not send help DM to ${message.author.tag}\n`, error);
                     message.channel.send(`Umm, ${message.author.tag}, it seems like I can\'t DM you. Maybe you have DMs disabled?`);
                 });
         }

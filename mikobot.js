@@ -4,18 +4,16 @@ const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.events = new Discord.Collection();
 
-console.log('------Welcome to MikoBot------\nLoading files...');
-
-const { token } = require('./config/token.json');
-
+console.log('---------------Welcome to MikoBot---------------\n⏳ Loading files...');
 loadFiles();
 
-const Guilds = require('./models/Guilds');
+console.log('⏳ Syncing guild database...');
+require('./models/Guilds').sync({ alter: true }).then(async () => {
+    console.log('✅ Synced guild database\n⏳ Logging in...');
 
-console.log('Syncing guild database...');
-Guilds.sync({ alter: true });
-
-bot.login(token);
+    await bot.login(require('./config/token.json').token);
+    console.log(`✅ Logged in as ${bot.user.tag}`);
+});
 
 function loadFiles() {
     let loadedCommands = 0, loadedEvents = 0;
@@ -26,7 +24,6 @@ function loadFiles() {
         const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
         for (const file of commandFiles) {
             const command = require(`./commands/${folder}/${file}`);
-
             bot.commands.set(command.name, command);
             loadedCommands++;
         }
@@ -38,6 +35,7 @@ function loadFiles() {
         const eventFiles = fs.readdirSync(`./events/${folder}`).filter(file => file.endsWith('.js'));
         for (const file of eventFiles) {
             const event = require(`./events/${folder}/${file}`);
+
             if (event.once) {
                 bot.once(folder, (...args) => event.run(...args, bot));
             } else {
@@ -49,5 +47,5 @@ function loadFiles() {
         }
     }
 
-    console.log(`Loaded commands: ${loadedCommands}\nLoaded event handlers: ${loadedEvents}`);
+    console.log(`✅ Loaded ${loadedCommands} commands and ${loadedEvents} event handlers`);
 }
