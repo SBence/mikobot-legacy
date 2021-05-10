@@ -2,7 +2,6 @@ const Guilds = require('../../models/Guilds');
 
 module.exports = {
     name: 'cleanGuild',
-    once: false,
     protected: true,
     async run(guild, bot) {
         try {

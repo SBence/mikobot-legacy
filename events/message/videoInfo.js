@@ -4,7 +4,6 @@ const getGuildConfig = require('../../utils/getGuildConfig');
 
 module.exports = {
     name: 'videoinfo',
-    once: false,
     async run(message, bot) {
         if (message.channel.type !== 'text' || message.author.bot || !message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return;
 
