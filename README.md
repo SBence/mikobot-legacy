@@ -3,17 +3,19 @@
 
 ### Installation
 
+1. Clone this repository and install dependencies
+
 ```sh
-# 1. Clone this repository
 git clone https://github.com/SBence/MikoBot.git
-
-# 2. Navigate to the cloned repository's directory
 cd MikoBot
-
-# 3. Install dependencies
 npm install
+```
 
-# 4. Run the bot
+2. Add your bot token to `config/token.json`
+
+3. Run the bot
+
+```sh
 node mikobot
 ```
 
