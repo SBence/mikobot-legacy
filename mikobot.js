@@ -11,7 +11,16 @@ console.log('⏳ Syncing guild database...');
 require('./models/Guilds').sync({ alter: true }).then(async () => {
     console.log('✅ Synced guild database\n⏳ Logging in...');
 
-    await bot.login(require('./config/token.json').token);
+    try {
+        await bot.login(require('./config/token.json').token);
+    }
+    catch (e) {
+        if (e['code'] === 'TOKEN_INVALID') {
+            return console.error('⚠️ Invalid token. Check config/token.json');
+        }
+        return console.error('⚠️ Login error');
+    }
+
     console.log(`✅ Logged in as ${bot.user.tag}`);
 });
 
