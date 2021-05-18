@@ -1,3 +1,5 @@
+const rangeCheck = require('../../utils/rangeCheck');
+
 module.exports = {
     name: 'bulkdelete',
     aliases: ['batchdelete', 'prune'],
@@ -9,9 +11,7 @@ module.exports = {
     async run(message, args, bot) {
         const amount = parseInt(args[0]) + 1;
 
-        if (isNaN(amount)) {
-            return message.channel.send('Invalid number.');
-        } else if (amount < 2 || amount > 100) {
+        if (!rangeCheck(amount, 2, 100)) {
             return message.channel.send('You must input a number between 1 and 99.');
         }
 
