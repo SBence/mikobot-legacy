@@ -1,10 +1,6 @@
 # Project-specific
 config/
 
-# IDE-specific
-.vscode/*
-!.vscode/launch.json
-
 # Logs
 logs
 *.log
