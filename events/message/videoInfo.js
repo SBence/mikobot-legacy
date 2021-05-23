@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const getGuildConfig = require('../../utils/getGuildConfig');
+const secondsToHms = require('../../utils/secondsToHms');
 
 module.exports = {
     name: 'videoinfo',
@@ -23,7 +24,7 @@ module.exports = {
                 .setThumbnail(details.thumbnails[details.thumbnails.length - 2].url)
                 .setColor('#ff0000');
 
-            if (details.lengthSeconds !== '0') ytEmbed.addField('⏱️ Length', secondsToHMS(details.lengthSeconds), true);
+            if (details.lengthSeconds !== '0') ytEmbed.addField('⏱️ Length', secondsToHms(details.lengthSeconds), true);
             ytEmbed.addField('👁️ Views', parseInt(details.viewCount).toLocaleString('fr-FR'), true);
 
             if (details.uploadDate === details.publishDate) {
@@ -44,14 +45,3 @@ module.exports = {
         return 0;
     }
 };
-
-function secondsToHMS(d) {
-    d = Number(d);
-    const h = Math.floor(d / 3600);
-    const m = Math.floor(d % 3600 / 60);
-    const s = Math.floor(d % 3600 % 60);
-    const hDisplay = h > 0 ? h + ':' : '';
-    const mDisplay = m.toString().padStart(2, '0') + ':';
-    const sDisplay = s.toString().padStart(2, '0');
-    return hDisplay + mDisplay + sDisplay;
-}
