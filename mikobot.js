@@ -33,6 +33,7 @@ function loadFiles() {
         const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
         for (const file of commandFiles) {
             const command = require(`./commands/${folder}/${file}`);
+            command.category = folder;
             bot.commands.set(command.name, command);
             loadedCommands++;
         }
