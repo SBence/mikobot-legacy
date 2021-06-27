@@ -28,18 +28,17 @@ module.exports = {
     async run(message, bot) {
         if (!await conditionsMet(message, bot)) return;
 
-        message.channel.startTyping();
         const messages = await getMessages(message.channel, 1000);
         const chain = new markovChain({ stateSize: 2 });
         chain.addData(messages.map(msg => msg.content));
-        const result = chain.generate(markovOptions);
-        message.channel.stopTyping();
 
-        if (result) {
-            return message.channel.send(result.string);
-        } else {
-            console.log('ℹ️ Markov string generation failed.');
-            return message.channel.send('I literally have no words. Wow.');
+        try {
+            const result = chain.generate(markovOptions);
+            message.channel.startTyping();
+            message.channel.send(result.string);
+            message.channel.stopTyping();
+        } catch (error) {
+            return;
         }
     }
 };
