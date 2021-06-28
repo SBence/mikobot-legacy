@@ -18,7 +18,7 @@ module.exports = {
 
         try {
             const affectedRows = await Guilds.update({ speakchance: newChance }, { where: { id: message.guild.id } });
-            return message.channel.send(`Speaking chance set to \`${await getGuildConfig(message.guild, 'speakchance')}\``);
+            return message.channel.send(`Speaking chance set to \`${await getGuildConfig(message.guild, 'speakchance')}%\``);
         }
         catch (e) {
             message.channel.send('An error has occurred while trying to change the speaking chance.');
