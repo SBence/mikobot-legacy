@@ -28,17 +28,17 @@ module.exports = {
     async run(message, bot) {
         if (!await conditionsMet(message, bot)) return;
 
-        const messages = (await getMessages(message.channel, 1000)).filter(msg => !msg.author.bot);
+        message.channel.startTyping();
+        const messages = (await getMessages(message.channel, 500)).filter(msg => !msg.author.bot);
         const chain = new markovChain({ stateSize: 2 });
         chain.addData(messages.map(msg => msg.content));
 
         try {
-            const result = chain.generate(markovOptions);
-            message.channel.startTyping();
-            message.channel.send(result.string);
-            message.channel.stopTyping();
+            await message.channel.send(chain.generate(markovOptions).string);
         } catch (error) {
             return;
+        } finally {
+            message.channel.stopTyping();
         }
     }
 };
