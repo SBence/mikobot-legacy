@@ -52,7 +52,7 @@ async function getMessages(channel, limit) {
     } else {
         const rounds = (limit / 100) + (limit % 100 ? 1 : 0);
         let last_id = '';
-        for (let x = 0; x < rounds; x++) {
+        for (let x = 0; x < rounds; ++x) {
             const options = {
                 limit: 100
             };

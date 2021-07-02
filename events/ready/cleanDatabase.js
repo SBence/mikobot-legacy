@@ -14,7 +14,7 @@ module.exports = {
             for (const guildID of orphanedGuildIDs) {
                 const rowCount = await Guilds.destroy({ where: { id: guildID } });
                 if (rowCount) {
-                    removed++;
+                    ++removed;
                 } else {
                     console.error(`⚠️ Guild with ID ${guildID} couldn't be removed from database. This error usually indicates a bug in the bot code, not in Sequelize.`);
                 }

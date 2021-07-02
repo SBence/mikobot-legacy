@@ -35,7 +35,7 @@ function loadFiles() {
             const command = require(`./commands/${folder}/${file}`);
             command.category = folder;
             bot.commands.set(command.name, command);
-            loadedCommands++;
+            ++loadedCommands;
         }
     }
 
@@ -53,7 +53,7 @@ function loadFiles() {
             }
 
             bot.events.set(event.name, event);
-            loadedEvents++;
+            ++loadedEvents;
         }
     }
 
