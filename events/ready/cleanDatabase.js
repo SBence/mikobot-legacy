@@ -7,13 +7,9 @@ module.exports = {
     async run(bot) {
         console.log('⏳ Cleaning guild database...');
         let removed = 0;
-        const guildIDs = bot.guilds.valueOf().map(guild => guild.id);
         try {
-            const guildsInDb = await Guilds.findAll({ attributes: ['id'] });
-            const orphanedGuildIDs = guildsInDb.map(guild => guild.id).filter(guildID => !guildIDs.includes(guildID));
-            for (const guildID of orphanedGuildIDs) {
-                const rowCount = await Guilds.destroy({ where: { id: guildID } });
-                if (rowCount) {
+            for (const guildID of (await Guilds.findAll({ attributes: ['id'] })).map(guild => guild.id).filter(gID => !(bot.guilds.valueOf().map(guild => guild.id)).includes(gID))) {
+                if (await Guilds.destroy({ where: { id: guildID } })) {
                     ++removed;
                 } else {
                     console.error(`⚠️ Guild with ID ${guildID} couldn't be removed from database. This error usually indicates a bug in the bot code, not in Sequelize.`);
