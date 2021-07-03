@@ -28,11 +28,11 @@ module.exports = database.define('guilds', {
     speak: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false
+        allowNull:false
     },
-    randomspeak: { // TODO Add toggle
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
+    speakchance: {
+        type: DataTypes.INTEGER,
+        defaultValue: 2,
         allowNull: false
     },
     videoinfo: {

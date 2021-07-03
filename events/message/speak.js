@@ -7,16 +7,10 @@ async function conditionsMet(message, bot) {
     if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) return false;
     if (!await getGuildConfig(message.guild, 'speak')) return false;
     if (message.mentions.has(bot.user)) return true;
-    if (!await getGuildConfig(message.guild, 'randomspeak')) return false;
-    if (!Math.floor(Math.random() * 1000 / getGuildChance(message.guild))) return true;
+    const chance = await getGuildConfig(message.guild, 'speakchance');
+    if (chance === 0) return false;
+    if (!Math.floor(Math.random() * 100 / chance)) return true;
     return false;
-}
-
-const guildChances = {};
-
-function getGuildChance(guild) {
-    if (guildChances[guild.id] === undefined) { guildChances[guild.id] = 1; }
-    return guildChances[guild.id]++;
 }
 
 const markovOptions = {
@@ -33,8 +27,6 @@ module.exports = {
     name: 'speak',
     async run(message, bot) {
         if (!await conditionsMet(message, bot)) return;
-
-        guildChances[message.guild.id] = 0;
 
         message.channel.startTyping();
         const messages = (await getMessages(message.channel, 500)).filter(msg => !msg.author.bot);
