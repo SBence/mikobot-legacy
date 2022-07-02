@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.events = new Discord.Collection();
 
-console.log('---------------Welcome to MikoBot---------------\n⏳ Loading files...');
+console.log('---------------Welcome to MultiBot---------------\n⏳ Loading files...');
 loadFiles();
 
 console.log('⏳ Syncing guild database...');

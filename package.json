@@ -1,8 +1,8 @@
 {
-  "name": "mikobot",
+  "name": "multibot",
   "version": "1.0.0",
   "description": "",
-  "main": "mikobot.js",
+  "main": "multibot.js",
   "scripts": {
     "start": "node ."
   },
@@ -19,5 +19,8 @@
     "utf-8-validate": "^5.0.4",
     "ytdl-core": "^4.5.0",
     "zlib-sync": "^0.1.7"
+  },
+  "devDependencies": {
+    "node-gyp": "^9.0.0"
   }
 }

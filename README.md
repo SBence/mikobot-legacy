@@ -1,4 +1,4 @@
-# MikoBot
+# MultiBot
 ## A multi-purpose Discord bot
 
 ### Installation
@@ -6,8 +6,8 @@
 1. Clone this repository and install dependencies
 
 ```sh
-git clone https://github.com/SBence/MikoBot.git
-cd MikoBot
+git clone https://github.com/SBence/MultiBot.git
+cd MultiBot
 npm install
 ```
 
@@ -16,7 +16,7 @@ npm install
 3. Run the bot
 
 ```sh
-node mikobot
+node multibot
 ```
 
 ### Bot usage

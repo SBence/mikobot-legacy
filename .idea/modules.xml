@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mikobot.iml" filepath="$PROJECT_DIR$/mikobot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multibot.iml" filepath="$PROJECT_DIR$/multibot.iml" />
     </modules>
   </component>
 </project>
