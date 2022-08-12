@@ -16,11 +16,11 @@
     "sequelize": "^6.6.2",
     "sodium": "^3.0.2",
     "sqlite3": "^5.0.2",
-    "utf-8-validate": "^5.0.4",
+    "utf-8-validate": "^6.0.2",
     "ytdl-core": "^4.5.0",
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "node-gyp": "^9.0.0"
+    "node-gyp": "^10.0.1"
   }
 }
